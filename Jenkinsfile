@@ -5,7 +5,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = "us-east-1"
     }
-    stages {
+   /* stages {
         stage("Create EKS Cluster") {
             steps {
                 script {
@@ -44,8 +44,8 @@ pipeline {
                     }
                 }
             }
-        }
-        /* stage("Delete EKS Frontend") {
+        } */
+        stage("Delete EKS Frontend") {
             steps {
                 script {
                     dir('k8s_manifests/mongo') {
@@ -71,6 +71,6 @@ pipeline {
                     }
                 }
             }
-        } */
+        } 
     }
 }
