@@ -1,16 +1,16 @@
 resource "time_sleep" "wait_for_kubernetes" {
+  create_duration = "20s"
+}
 
-    depends_on = [
-       module.eks
-    ]
-
-    create_duration = "20s"
+module "eks" {
+  source = "terraform/eks.tf"
+  # Other module configuration options
 }
 
 resource "kubernetes_namespace" "kube-namespace" {
   depends_on = [time_sleep.wait_for_kubernetes]
+  
   metadata {
-    
     name = "prometheus"
   }
 }
@@ -20,16 +20,13 @@ resource "helm_release" "prometheus" {
   name       = "prometheus"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  namespace  = kubernetes_namespace.kube-namespace.id
+  namespace  = kubernetes_namespace.kube-namespace.metadata[0].id
   create_namespace = true
   version    = "51.3.0"
-  values = [
-    file("values.yaml")
-  ]
-  timeout = 2000
-  
+  values     = [file("values.yaml")]
+  timeout    = 2000
 
-set {
+  set {
     name  = "podSecurityPolicy.enabled"
     value = true
   }
@@ -41,7 +38,7 @@ set {
 
   # You can provide a map of value using yamlencode. Don't forget to escape the last element after point in the name
   set {
-    name = "server\\.resources"
+    name  = "server\\.resources"
     value = yamlencode({
       limits = {
         cpu    = "200m"
