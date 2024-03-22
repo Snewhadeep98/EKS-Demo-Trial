@@ -48,7 +48,7 @@ pipeline {
         stage("Deployment of Grafana-Prometheus Monitoring") {
             steps {
                 script {
-                    dir('Grafana-Prometheus') {
+                    dir('terraform/Grafana-Prometheus') {
                         sh "terraform init"
                         sh "terraform plan"
                         sh "terraform apply -auto-approve"
