@@ -14,7 +14,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: k8s-demolb-fa1658a882-229363250.us-east-1.elb.amazonaws.com
+    - host: k8s-demolb-fa1658a882-1735995448.us-east-1.elb.amazonaws.com
       http:
         paths:
           - path: /api
