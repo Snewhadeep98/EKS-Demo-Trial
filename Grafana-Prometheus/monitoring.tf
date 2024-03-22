@@ -3,7 +3,7 @@ resource "time_sleep" "wait_for_kubernetes" {
 }
 
 module "eks" {
-  source = "./terraform"
+  source = "/terraform/eks.tf"
   # Other module configuration options
 }
 
