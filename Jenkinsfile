@@ -6,7 +6,7 @@ pipeline {
         AWS_DEFAULT_REGION = "us-east-1"
     }
     stages {
-        /* stage("Create EKS Cluster") {
+        stage("Create EKS Cluster") {
             steps {
                 script {
                     dir('terraform') {
@@ -45,18 +45,7 @@ pipeline {
                 }
             }
         }
-        stage("Deployment of Grafana-Prometheus Monitoring") {
-            steps {
-                script {
-                    dir('terraform') {
-                        sh "terraform init"
-                        sh "terraform plan"
-                        sh "terraform apply -auto-approve"
-                    }
-                }
-            }
-        } */
-        stage("Delete EKS Frontend") {
+        /* stage("Delete EKS Frontend") {
             steps {
                 script {
                     dir('k8s_manifests/mongo') {
@@ -82,6 +71,6 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
     }
 }
